@@ -237,26 +237,36 @@ local function open_note_day()
   local lines = files.current_lines()
 
   if #lines == 1 and lines[1] == '' then
-    local template_path = files.join_paths({
-      notes_root,
-      '/.note/daily_template'
-    })
-
-    if files.exists(template_path) then
+    local file = files.sibling_across_dirs(path_note_today, false)
+    if file ~= nil then
       vim.api.nvim_put(
-        vim.fn.readfile(template_path),
+        vim.fn.readfile(file),
         'l',
         false,
         false
       )
     else
-      vim.api.nvim_put({
-        '# Goal',
-        '',
-        '# Tasks',
-        '',
-        '# Notes',
-      }, 'l', false, false)
+      local template_path = files.join_paths({
+        notes_root,
+        '/.note/daily_template'
+      })
+
+      if files.exists(template_path) then
+        vim.api.nvim_put(
+          vim.fn.readfile(template_path),
+          'l',
+          false,
+          false
+        )
+      else
+        vim.api.nvim_put({
+          '# Goal',
+          '',
+          '# Tasks',
+          '',
+          '# Notes',
+        }, 'l', false, false)
+      end
     end
   end
 end
