@@ -667,6 +667,8 @@ function M.create_buffer_keymaps(prefix)
   bufkey('s', ':NoteTaskStart<cr>')
   bufkey('d', ':NoteTaskDone<cr>')
   bufkey('c', ':NoteCurrentItem<cr>')
+  bufkey('iy', ':NoteItemLinkedYank<cr>')
+  bufkey('ip', ':NoteItemLinkedPaste<cr>')
 
   local function dot_repeatable(fn)
     -- https://gist.github.com/kylechui/a5c1258cd2d86755f97b10fc921315c3
